@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [[ "$(uci -q get pushover-notify.conf.on_unconfigured_dhcp)" == "1" ]] ; then
+	if [[ "${ACTION}" == "add" ]] ; then
+		if [[ -z "$(cat /etc/config/dhcp | awk "/'${HOSTNAME}'/{print \$3}")" ]] ; then
+			printf "DHCP Host:\n${HOSTNAME}\nIP:\n${IPADDR}\nAddress:\n${MACADDR}" | /usr/bin/pushover-notify
+		fi
+	fi
+fi

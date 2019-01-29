@@ -1,0 +1,59 @@
+#!/bin/sh /etc/rc.common
+
+START=20
+USE_PROCD=1
+
+apply_policies() {
+	ubus -t 90 wait_for network.interface 2>/dev/null
+	lua /usr/lib/policy-routing/policy-routing.lua $1
+}
+
+start_service() {
+	apply_policies start
+}
+
+reload_service() {
+	apply_policies reload
+}
+
+stop_service() {
+	apply_policies stop
+}
+
+validate_config_section() {
+	uci_validate_section 'policy-routing' config "${1}" \
+		'enabled:integer' \
+		'loglevel:integer'
+}
+
+validate_interface_section() {
+	uci_validate_section 'policy-routing' interface "${1}" \
+		'strict:integer' \
+		'interface:string'
+}
+
+validate_policy_section() {
+	uci_validate_section 'policy-routing' policy "${1}" \
+		'comment:string' \
+		'interface:string' \
+		'domains:list(string)' \
+		'remote_nets:list(or(cidr4,cidr6))' \
+		'remote_ports:list(or(port,portrange))' \
+		'local_nets:list(or(cidr4,cidr6))' \
+		'local_ports:list(or(port,portrange))'
+}
+
+service_triggers() {
+	procd_add_reload_trigger 'firewall'
+	procd_add_reload_trigger 'policy-routing'
+	procd_open_trigger
+	procd_add_config_trigger "config.change" "firewall" /etc/init.d/policy-routing reload
+	procd_add_config_trigger "config.change" "policy-routing" /etc/init.d/policy-routing reload
+	procd_close_trigger
+
+	procd_open_validate
+	validate_config_section
+	validate_interface_section
+	validate_policy_section
+	procd_close_validate
+}

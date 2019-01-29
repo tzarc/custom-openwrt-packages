@@ -1,0 +1,12 @@
+#!/bin/sh
+
+case "$ACTION" in
+	ifup|ifdown)
+		# Enable forwarding
+		echo 1 > /proc/sys/net/ipv4/ip_forward
+		for f in /proc/sys/net/ipv4/conf/*/rp_filter ; do echo 2 > $f ; done
+		echo 0 > /proc/sys/net/ipv4/route/flush
+		# Reload the config
+		( cd /usr/lib/policy-routing; lua policy-routing.lua reload ; )
+		;;
+esac

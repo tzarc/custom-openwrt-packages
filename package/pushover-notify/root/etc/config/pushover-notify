@@ -1,0 +1,6 @@
+
+config conf 'conf'
+	option enabled '0'
+	option on_unconfigured_dhcp '0'
+	option app ''
+	option user ''

@@ -1,0 +1,16 @@
+# Build area
+/.temp
+
+# Output files
+/ipk
+/img
+
+# Modifiable files
+/pkg-signing*
+/authorized_keys
+/root-pass
+/extra-files
+/deploy.sh
+
+# Transient stuff
+/package/private-internet-access/root/usr/share/pia/*

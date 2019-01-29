@@ -1,0 +1,14 @@
+#!/bin/sh
+
+while [ ! -z "$(uci -q get ucitrack.@private-internet-access[-1] 2>/dev/null)" ] ; do
+	uci -q delete ucitrack.@private-internet-access[-1]
+done
+
+uci -q batch <<-EOF >/dev/null
+	add ucitrack private-internet-access
+	set ucitrack.@private-internet-access[-1].init='private-internet-access'
+	commit ucitrack
+EOF
+
+rm -f /tmp/luci-indexcache
+exit 0

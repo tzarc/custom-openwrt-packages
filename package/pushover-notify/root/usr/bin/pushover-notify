@@ -1,0 +1,11 @@
+#!/bin/sh
+enabled=$(uci -q get pushover-notify.conf.enabled)
+app=$(uci -q get pushover-notify.conf.app)
+user=$(uci -q get pushover-notify.conf.user)
+
+message="$@"
+[[ -z "${message}" ]] && message="$(cat)"
+
+if [[ "${enabled}" == "1" ]] && [[ ! -z "${app}" ]] && [[ ! -z "${user}" ]] && [[ ! -z "${message}" ]] ; then
+	curl -s -F "token=${app}" -F "user=${user}" -F "message=${message}" -F "title=$(uname -n)" https://api.pushover.net/1/messages.json >/dev/null
+fi

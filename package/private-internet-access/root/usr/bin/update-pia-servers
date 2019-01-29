@@ -1,0 +1,64 @@
+#!/bin/sh
+TARGET_DIR=$1
+[ -z "${TARGET_DIR}" ] && echo "No target directory specified." && exit 1
+
+echo "Updating PIA server definitions..."
+
+download() {
+	local url=$1
+	local filename=$2
+	[ ! -d "$(dirname "${filename}")" ] && mkdir -p "$(dirname "${filename}")"
+	if [ -n "$(which curl 2>/dev/null)" ] ; then
+		curl -L "${url}" 2>/dev/null > "${filename}"
+	elif [ -n "$(which wget 2>/dev/null)" ] ; then
+		wget -O "${filename}" "${url}" 2>/dev/null
+	else
+		echo "Could not find appropriate download-initiating application. Exiting."
+		exit 1
+	fi
+}
+
+download_to_file() {
+	local url=$1
+	local outfile=$2
+
+	echo "Getting '${url}'..."
+	if [ ! -f "${outfile}" ] ; then
+		download "${url}" "${outfile}"
+	fi
+	if [ ! -f "${outfile}" ] ; then
+		echo "Could not find '${outfile}'. Exiting."
+		exit 1
+	fi
+}
+
+download_extract_zip() {
+	local url=$1
+	local outfile=$2
+	local outdir=$3
+
+	download_to_file "${url}" "${outfile}"
+	echo "Extracting files..."
+	[ ! -d "${outdir}" ] && mkdir -p "${outdir}"
+	unzip -o "${outfile}" -d "${outdir}" >/dev/null 2>&1
+}
+
+pia_tmpdir=$(mktemp -d)
+download_extract_zip "https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip" "${pia_tmpdir}/openvpn-strong.zip" "${pia_tmpdir}/openvpn-strong/"
+
+# Copy across the certificates
+[ ! -d "${TARGET_DIR}" ] && mkdir -p "${TARGET_DIR}"
+find "${pia_tmpdir}/openvpn-strong/" -name '*.crt' -exec cp '{}' "${TARGET_DIR}" \;
+find "${pia_tmpdir}/openvpn-strong/" -name '*.pem' -exec cp '{}' "${TARGET_DIR}" \;
+
+# Set up the servers list file
+find "${pia_tmpdir}/openvpn-strong/" -name '*.ovpn' | sort | while read ovpn; do
+	NAME=$(basename "${ovpn}" .ovpn)
+	SERVER=$(cat "${ovpn}" | awk '/^remote /{print $2}')
+	echo "${NAME}:${SERVER}"
+done > "${TARGET_DIR}/servers.list"
+
+# Clean up
+rm -rf "${pia_tmpdir}"
+
+echo "Done."

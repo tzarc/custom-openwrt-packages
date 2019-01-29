@@ -1,0 +1,11 @@
+
+config config 'config'
+	option loglevel '1'
+
+config connection
+	option name 'pia'
+	option enabled '0'
+	option username ''
+	option password ''
+	option server 'AU Sydney'
+	option routing_table ''
