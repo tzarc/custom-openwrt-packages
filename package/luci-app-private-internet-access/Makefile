@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-private-internet-access
 PKG_VERSION:=0.2.0
-PKG_RELEASE:=10
+PKG_RELEASE:=11
 
 PKG_LICENSE:=UNLICENSE
 PKG_MAINTAINER:=Nick Brassel <nick@tzarc.org>

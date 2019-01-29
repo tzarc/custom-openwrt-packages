@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-pushover-notify
 PKG_VERSION:=0.2.1
-PKG_RELEASE:=9
+PKG_RELEASE:=10
 
 PKG_LICENSE:=UNLICENSE
 PKG_MAINTAINER:=Nick Brassel <nick@tzarc.org>

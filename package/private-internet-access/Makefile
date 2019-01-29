@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=private-internet-access
 PKG_VERSION:=0.2.0
-PKG_RELEASE:=34
+PKG_RELEASE:=35
 
 PKG_LICENSE:=UNLICENSE
 PKG_MAINTAINER:=Nick Brassel <nick@tzarc.org>
