@@ -1,6 +1,6 @@
 # Installation
 
-### OpenWrt 18.06.1 or later:
+### OpenWrt 18.06.2 or later:
 
     opkg update
     opkg install uclient-fetch libustream-mbedtls ca-certificates

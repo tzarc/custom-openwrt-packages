@@ -5,8 +5,8 @@ source common.bashinc.sh
 
 # Overrides...
 export target_dir="$script_dir/img"
-export default_version="18.06.1"
-declare -a supported_versions=( master 18.06.1 )
+export default_version="18.06.2"
+declare -a supported_versions=( master 18.06.2 )
 
 # No args => help
 if [ "${#script_args[@]}" -eq "0" ] ; then

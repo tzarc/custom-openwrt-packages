@@ -26,7 +26,7 @@ if [ ! -e "$signfile_key" ] || [ ! -e "$signfile_pub" ]; then
 fi
 
 # SDK...
-sdk_url="https://downloads.openwrt.org/releases/18.06.1/targets/x86/64/openwrt-sdk-18.06.1-x86-64_gcc-7.3.0_musl.Linux-x86_64.tar.xz"
+sdk_url="https://downloads.openwrt.org/releases/18.06.2/targets/x86/64/openwrt-sdk-18.06.2-x86-64_gcc-7.3.0_musl.Linux-x86_64.tar.xz"
 sdk_file="$temp_dir/sdk.tar.xz"
 sdk_dir="$temp_dir/sdk"
 get_openwrt_sdk() {
