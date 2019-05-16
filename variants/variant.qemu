@@ -1,13 +1,9 @@
 source base_variant.include
+source router.include
 
 export DEVICE_ARCH=armvirt
 export DEVICE_PROFILE=
 export DEVICE_PACKAGES="${DEVICE_PACKAGES} kmod-e1000"
-export DEVICE_PACKAGES="${DEVICE_PACKAGES} bind-tools ddns-scripts_cloudflare.com-v4 dnsmasq-full drill ipset iptables kmod-ipt-raw kmod-ipt-raw6 luci-app-ddns luci-app-firewall luci-app-openvpn nftables pciutils openvpn-openssl stubby zerotier"
-
-export CUSTOM_PACKAGES="luci-app-pushover-notify luci-app-simple-adblock"
-export CUSTOM_PACKAGES="${CUSTOM_PACKAGES} private-internet-access policy-routing"
-export CUSTOM_PACKAGES="${CUSTOM_PACKAGES} luci-app-private-internet-access luci-app-policy-routing"
 
 export DEVICE_TYPE=32
 
