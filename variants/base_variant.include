@@ -26,6 +26,7 @@ export BASE_PACKAGES="
     libustream-openssl
     luci
     luci-theme-material
+    mtr
     nano
     openssh-client
     openssh-server
