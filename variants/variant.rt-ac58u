@@ -4,7 +4,12 @@ source router.include
 export DEVICE_ARCH=ipq40xx
 export DEVICE_TYPE=generic
 export DEVICE_PROFILE=asus_rt-ac58u
-export DEVICE_PACKAGES="${DEVICE_PACKAGES} -wpad-mini zram-swap wpad-mesh"
+export DEVICE_PACKAGES="
+    ${DEVICE_PACKAGES}
+    -wpad-mini
+    zram-swap
+    wpad-mesh
+    "
 
 if [[ "$target_version" == "master" ]]; then
     export IMAGEBUILDER_URL="https://downloads.openwrt.org/snapshots/targets/${DEVICE_ARCH}/${DEVICE_TYPE}/openwrt-imagebuilder-${DEVICE_ARCH}.Linux-x86_64.tar.xz"

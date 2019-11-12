@@ -1,5 +1,30 @@
-export DEVICE_PACKAGES="${DEVICE_PACKAGES} bind-tools darkstat ddns-scripts_cloudflare.com-v4 dnsmasq-full drill ipset iptables kmod-ipt-raw kmod-ipt-raw6 kmod-usb-net-rndis luci-app-ddns luci-app-firewall luci-app-nlbwmon luci-app-openvpn nftables pciutils openvpn-openssl unbound usb-modeswitch zerotier"
+export DEVICE_PACKAGES="
+    ${DEVICE_PACKAGES}
+    bind-tools
+    dnsmasq-full
+    drill
+    ipset
+    iptables
+    kmod-ipt-raw
+    kmod-ipt-raw6
+    kmod-usb-net-rndis
+    luci-app-firewall
+    luci-app-nlbwmon
+    luci-app-openvpn
+    nftables
+    pciutils
+    openvpn-openssl
+    unbound
+    usb-modeswitch
+    zerotier
+    "
 
-export CUSTOM_PACKAGES="${CUSTOM_PACKAGES} luci-app-pushover-notify luci-app-simple-adblock"
-export CUSTOM_PACKAGES="${CUSTOM_PACKAGES} private-internet-access policy-routing"
-export CUSTOM_PACKAGES="${CUSTOM_PACKAGES} luci-app-private-internet-access luci-app-policy-routing"
+export CUSTOM_PACKAGES="
+    ${CUSTOM_PACKAGES}
+    luci-app-pushover-notify
+    luci-app-simple-adblock
+    private-internet-access
+    luci-app-private-internet-access
+    policy-routing
+    luci-app-policy-routing
+    "

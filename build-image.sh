@@ -45,7 +45,7 @@ build_one_variant() {
 	deploy_extra_files
 
 	pushd "$device_directory" >/dev/null
-	rcmd make image PROFILE="$DEVICE_PROFILE" FILES=files/ PACKAGES="$BASE_PACKAGES $DEVICE_PACKAGES $CUSTOM_PACKAGES"
+	rcmd make image PROFILE="$DEVICE_PROFILE" FILES=files/ PACKAGES="$(echo $BASE_PACKAGES $DEVICE_PACKAGES $CUSTOM_PACKAGES | xargs echo | sed -e 's#\s+# #g')"
 	popd >/dev/null
 
 	# Collect the sysupgrade binaries, copy to output directory

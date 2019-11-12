@@ -3,7 +3,10 @@ source router.include
 
 export DEVICE_ARCH=armvirt
 export DEVICE_PROFILE=
-export DEVICE_PACKAGES="${DEVICE_PACKAGES} kmod-e1000"
+export DEVICE_PACKAGES="
+    ${DEVICE_PACKAGES}
+    kmod-e1000
+    "
 
 export DEVICE_TYPE=32
 

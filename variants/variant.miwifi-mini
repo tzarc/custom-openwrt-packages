@@ -3,4 +3,11 @@ source base_variant.include
 export DEVICE_ARCH=ramips
 export DEVICE_TYPE=mt7620
 export DEVICE_PROFILE=miwifi-mini
-export DEVICE_PACKAGES="${DEVICE_PACKAGES} kmod-rt2500-usb kmod-rt2800-usb kmod-rt73-usb kmod-rtl8187 zram-swap"
+export DEVICE_PACKAGES="
+    ${DEVICE_PACKAGES}
+    kmod-rt2500-usb
+    kmod-rt2800-usb
+    kmod-rt73-usb
+    kmod-rtl8187
+    zram-swap
+    "

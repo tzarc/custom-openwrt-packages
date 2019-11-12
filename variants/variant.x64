@@ -4,4 +4,11 @@ source router.include
 export DEVICE_ARCH=x86
 export DEVICE_TYPE=64
 export DEVICE_PROFILE=
-export DEVICE_PACKAGES="${DEVICE_PACKAGES} kmod-ath9k kmod-b43 kmod-r8169 kmod-usb-hid wpad-mesh"
+export DEVICE_PACKAGES="
+    ${DEVICE_PACKAGES}
+    kmod-ath9k
+    kmod-b43
+    kmod-r8169
+    kmod-usb-hid
+    wpad-mesh
+    "
