@@ -25,6 +25,16 @@ export CUSTOM_PACKAGES="
     luci-app-simple-adblock
     private-internet-access
     luci-app-private-internet-access
+    "
+
+export CUSTOM_PACKAGES="
+    ${CUSTOM_PACKAGES}
     policy-routing
     luci-app-policy-routing
     "
+
+#export CUSTOM_PACKAGES="
+#    ${CUSTOM_PACKAGES}
+#    vpn-policy-routing
+#    luci-app-vpn-policy-routing
+#    "
