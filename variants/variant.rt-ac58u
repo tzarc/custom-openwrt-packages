@@ -7,14 +7,19 @@ export DEVICE_PROFILE=asus_rt-ac58u
 export DEVICE_PACKAGES="
     ${DEVICE_PACKAGES}
     -wpad-mini
+    -wpad-basic
+    -kmod-ath10k-ct
+    -ath10k-firmware-qca4019-ct
+    kmod-ath10k
+    ath10k-firmware-qca4019
+    wpad-mesh-openssl
     zram-swap
-    wpad-mesh
     "
 
 if [[ "$target_version" == "master" ]]; then
-    export IMAGEBUILDER_URL="https://downloads.openwrt.org/snapshots/targets/${DEVICE_ARCH}/${DEVICE_TYPE}/openwrt-imagebuilder-${DEVICE_ARCH}.Linux-x86_64.tar.xz"
+    export IMAGEBUILDER_URL="https://downloads.openwrt.org/snapshots/targets/${DEVICE_ARCH}/${DEVICE_TYPE}/openwrt-imagebuilder-${DEVICE_ARCH}-${DEVICE_TYPE}.Linux-x86_64.tar.xz"
 else
-    export IMAGEBUILDER_URL="https://downloads.openwrt.org/releases/$target_version/targets/${DEVICE_ARCH}/${DEVICE_TYPE}/openwrt-imagebuilder-$target_version-${DEVICE_ARCH}.Linux-x86_64.tar.xz"
+    export IMAGEBUILDER_URL="https://downloads.openwrt.org/releases/$target_version/targets/${DEVICE_ARCH}/${DEVICE_TYPE}/openwrt-imagebuilder-$target_version-${DEVICE_ARCH}-${DEVICE_TYPE}.Linux-x86_64.tar.xz"
 fi
 
 export ITB_PREFIX=asus_rt-ac58u

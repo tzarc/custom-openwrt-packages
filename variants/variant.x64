@@ -10,5 +10,5 @@ export DEVICE_PACKAGES="
     kmod-b43
     kmod-r8169
     kmod-usb-hid
-    wpad-mesh
+    wpad-mesh-openssl
     "
