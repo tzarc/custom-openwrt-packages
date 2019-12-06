@@ -1,0 +1,12 @@
+
+config config 'config'
+	option loglevel '1'
+
+config connection
+	option enabled '0'
+	option account ''
+	option name 'mullvad_aus'
+	option transport 'udp'
+	option server 'au-syd.mullvad.net'
+	option port '1302'
+	option routing_table ''

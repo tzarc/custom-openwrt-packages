@@ -1,0 +1,47 @@
+#!/bin/sh /etc/rc.common
+START=89
+USE_PROCD=1
+
+validate_connection_section() {
+	uci_validate_section 'mullvad-vpn' connection "${1}" \
+		'account:string' \
+		'transport:string' \
+		'server:string' \
+		'port:string' \
+		'name:string' \
+		'enabled:bool'
+}
+
+service_triggers() {
+	procd_add_reload_trigger 'mullvad-vpn'
+	procd_open_trigger
+	procd_add_config_trigger "config.change" "mullvad-vpn" /etc/init.d/mullvad-vpn reload
+	procd_close_trigger
+
+	procd_open_validate
+	validate_connection_section
+	procd_close_validate
+}
+
+config_mullvad() {
+	local cfg="$1"
+	config_get cfg_enabled "$cfg" 'enabled' '0'
+	config_get cfg_account "$cfg" 'account' ''
+	config_get cfg_interfacename "$cfg" 'name' ''
+	config_get cfg_transport "$cfg" 'transport' ''
+	config_get cfg_server "$cfg" 'server' ''
+	config_get cfg_port "$cfg" 'server' ''
+	config_get cfg_routingtable "$cfg" 'routing_table' ''
+	if [ "$cfg_enabled" == "1" ] && [ ! -z "$cfg_transport" ] && [ ! -z "$cfg_server" ] && [ ! -z "$cfg_port" ] && [ ! -z "$cfg_account" ] ; then
+		procd_open_instance
+		procd_set_param command /usr/bin/lua /usr/lib/mullvad-vpn/apply-mullvad-vpn.lua spawn "$cfg" "$(echo "$cfg_enabled $cfg_interfacename $cfg_transport $cfg_server $cfg_port $cfg_account $cfg_routingtable" | md5sum | cut -d' ' -f1)"
+		procd_set_param respawn
+		procd_close_instance
+	fi
+}
+
+start_service() {
+	ubus -t 90 wait_for network.interface 2>/dev/null
+	config_load mullvad-vpn
+	config_foreach config_mullvad connection
+}

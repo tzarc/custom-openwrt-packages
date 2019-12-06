@@ -29,8 +29,8 @@ script_command_exec_test() {
 
 	if [[ ! -z "$test_kernel" ]] && [[ ! -z "$test_rootfs" ]] ; then
 		rcmd xterm -fg white -bg black -geometry 144x40 -e \
-			qemu-system-arm -M virt -m 128 -nographic \
-				-netdev user,id=qemulan0,net=192.168.1.0/24,host=192.168.1.254,dhcpstart=192.168.1.1,hostfwd=tcp:0.0.0.0:40022-:22,hostfwd=tcp:0.0.0.0:40080-:80,hostfwd=tcp:0.0.0.0:40443-:443 \
+			qemu-system-arm -M virt -m 256 -nographic \
+				-netdev user,id=qemulan0,net=172.22.8.0/24,host=172.22.8.254,dhcpstart=172.22.8.1,hostfwd=tcp:0.0.0.0:40022-:22,hostfwd=tcp:0.0.0.0:40080-:80,hostfwd=tcp:0.0.0.0:40443-:443 \
 				-netdev user,id=qemuwan0 \
 				-device e1000,netdev=qemulan0,id=eth0,mac=10:10:10:10:10:10 \
 				-device e1000,netdev=qemuwan0,id=eth1,mac=20:20:20:20:20:20 \

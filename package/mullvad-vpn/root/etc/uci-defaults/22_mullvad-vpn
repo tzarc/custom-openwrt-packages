@@ -1,0 +1,14 @@
+#!/bin/sh
+
+while [ ! -z "$(uci -q get ucitrack.@mullvad-vpn[-1] 2>/dev/null)" ] ; do
+	uci -q delete ucitrack.@mullvad-vpn[-1]
+done
+
+uci -q batch <<-EOF >/dev/null
+	add ucitrack mullvad-vpn
+	set ucitrack.@mullvad-vpn[-1].init='mullvad-vpn'
+	commit ucitrack
+EOF
+
+rm -f /tmp/luci-indexcache
+exit 0

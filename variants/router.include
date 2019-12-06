@@ -23,8 +23,7 @@ export CUSTOM_PACKAGES="
     ${CUSTOM_PACKAGES}
     luci-app-pushover-notify
     luci-app-simple-adblock
-    private-internet-access
-    luci-app-private-internet-access
+    mullvad-vpn
     "
 
 export CUSTOM_PACKAGES="
