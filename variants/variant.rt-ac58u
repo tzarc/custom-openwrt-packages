@@ -8,10 +8,6 @@ export DEVICE_PACKAGES="
     ${DEVICE_PACKAGES}
     -wpad-mini
     -wpad-basic
-    -kmod-ath10k-ct
-    -ath10k-firmware-qca4019-ct
-    kmod-ath10k
-    ath10k-firmware-qca4019
     wpad-mesh-openssl
     zram-swap
     "
