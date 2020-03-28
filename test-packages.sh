@@ -13,7 +13,7 @@ fi
 script_command_is_optional_test=1
 script_command_desc_test() { echo "Runs the test qemu target." ; }
 script_command_exec_test() {
-	local version="19.07.1"
+	local version="19.07.2"
 #	local version="master"
 	"$script_dir/build-image.sh" --version=${version} --variant=qemu
 
