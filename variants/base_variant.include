@@ -3,7 +3,6 @@ declare -ga EXTRA_REPOS=( "tzarc_custom=https://opkg.tzarc.io" "stangri-repo=htt
 export BASE_PACKAGES="
     -dnsmasq
     -dropbear
-    -ip
     -luci-app-qos
     -luci-theme-bootstrap
     -qos-scripts
@@ -14,8 +13,10 @@ export BASE_PACKAGES="
     haveged
     htop
     iftop
+    -ip
     ip-full
-    iw
+    -iw
+    iw-full
     iwinfo
     kmod-fs-ext4
     kmod-scsi-core

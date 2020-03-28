@@ -15,7 +15,7 @@ export DEVICE_PACKAGES="
     nftables
     pciutils
     openvpn-openssl
-    stubby
+    unbound-daemon-heavy
     usb-modeswitch
     zerotier
     "
