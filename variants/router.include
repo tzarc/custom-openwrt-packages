@@ -15,15 +15,28 @@ export DEVICE_PACKAGES="
     nftables
     pciutils
     openvpn-openssl
-    unbound-daemon-heavy
     usb-modeswitch
     zerotier
     "
 
+#export CUSTOM_PACKAGES="
+#    ${CUSTOM_PACKAGES}
+#    stubby
+#    "
+
+export CUSTOM_PACKAGES="
+    ${CUSTOM_PACKAGES}
+    unbound-daemon-heavy
+    "
+
+#export CUSTOM_PACKAGES="
+#    ${CUSTOM_PACKAGES}
+#    luci-app-simple-adblock
+#    "
+
 export CUSTOM_PACKAGES="
     ${CUSTOM_PACKAGES}
     luci-app-pushover-notify
-    luci-app-simple-adblock
     mullvad-vpn
     "
 
