@@ -5,8 +5,8 @@ source common.bashinc.sh
 
 # Overrides...
 export target_dir="$script_dir/img"
-export default_version="19.07.2"
-declare -a supported_versions=( master 19.07.2 )
+export default_version="19.07.3"
+declare -a supported_versions=( master 19.07.3 )
 
 # No args => help
 if [ "${#script_args[@]}" -eq "0" ] ; then
@@ -116,19 +116,35 @@ setup_extra_repos() {
 	[[ ! -d "$device_directory/files/etc/opkg/keys" ]] && mkdir -p "$device_directory/files/etc/opkg/keys" || true
 	[[ -f "$device_directory/files/etc/opkg/customfeeds.conf" ]] && rm "$device_directory/files/etc/opkg/customfeeds.conf" || true
 	if [[ ! -z "$EXTRA_REPOS" ]] && [[ "${#EXTRA_REPOS[@]}" -gt 0 ]] ; then
+		OIFS=$IFS
+		IFS=$'\n'
 		for repo_def in ${EXTRA_REPOS[@]} ; do
-			local repo_name=${repo_def%%=*}
-			local repo_url=${repo_def##*=}
+			local repo_name=$(echo $repo_def | cut -d'!' -f1)
+			local repo_url=$(echo $repo_def | cut -d'!' -f2)
+			local repo_key=$(echo $repo_def | cut -d'!' -f3)
+
+			echo "repo_def='$repo_def'"
+			echo "repo_name='$repo_name'"
+			echo "repo_url='$repo_url'"
+			echo "repo_key='$repo_key'"
+
 			cat "$device_directory/repositories.conf" | grep -v "$repo_name" > "$device_directory/repositories.conf.new"
 			mv "$device_directory/repositories.conf.new" "$device_directory/repositories.conf"
 			! grep -q "$repo_name" "$device_directory/repositories.conf" && sed -i "2 i\src/gz $repo_name $repo_url" "$device_directory/repositories.conf" || true
 			echo "src/gz $repo_name $repo_url" >> "$device_directory/files/etc/opkg/customfeeds.conf"
 
 			# Get the public key for the custom repo
-			download "$repo_url/$repo_name.pub" "$device_directory/files/etc/opkg/keys/$repo_name.pub"
+			if [[ "${repo_key:0:4}" == "http" ]] ; then
+				download "$repo_key" "$device_directory/files/etc/opkg/keys/$repo_name.pub"
+			elif [[ "${repo_key:0:18}" == "untrusted comment:" ]] ; then
+				echo -e "$repo_key" > "$device_directory/files/etc/opkg/keys/$repo_name.pub"
+			fi
+
+			# Move to match the fingerprint
 			local fingerprint=$("$device_directory/staging_dir/host/bin/usign" -F -p "$device_directory/files/etc/opkg/keys/$repo_name.pub")
 			mv "$device_directory/files/etc/opkg/keys/$repo_name.pub" "$device_directory/files/etc/opkg/keys/$fingerprint"
 		done
+		IFS=$OIFS
 	fi
 
 	if [[ "$build_variant" == "qemu" ]] ; then

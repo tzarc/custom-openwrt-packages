@@ -1,4 +1,7 @@
-declare -ga EXTRA_REPOS=( "tzarc_custom=https://opkg.tzarc.io" "stangri-repo=https://raw.githubusercontent.com/stangri/openwrt-repo/master" )
+declare -ga EXTRA_REPOS=(
+    "stangri-repo!https://raw.githubusercontent.com/stangri/openwrt-repo/master!untrusted comment: OpenWrt usign key of Stan Grishin\nRWR//HUXxMwMVnx7fESOKO7x8XoW4/dRidJPjt91hAAU2L59mYvHy0Fa\n"
+    "tzarc_custom!https://opkg.tzarc.io!https://opkg.tzarc.io/tzarc_custom.pub"
+)
 
 export BASE_PACKAGES="
     -dnsmasq
