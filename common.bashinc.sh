@@ -56,7 +56,7 @@ download() {
 		rcmd aria2c -d "$(dirname "$filename")" -o "$(basename "$filename")" -j5 -x5 -s5 "$url"
 	elif havecmd curl ; then
 		rcmd curl -L "$url" > "$filename"
-	elif havcmd wget ; then
+	elif havecmd wget ; then
 		rcmd wget -O "$filename" "$url"
 	else
 		echo_fail "Could not find appropriate application for downloading URLs. Exiting." >&2
