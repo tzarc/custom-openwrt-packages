@@ -9,7 +9,6 @@ export DEVICE_PACKAGES="
     -wpad-mini
     -wpad-basic
     wpad-mesh-openssl
-    zram-swap
     "
 
 if [[ "$target_version" == "master" ]]; then

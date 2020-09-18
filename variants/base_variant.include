@@ -6,6 +6,8 @@ declare -ga EXTRA_REPOS=(
 export BASE_PACKAGES="
     -dnsmasq
     -dropbear
+    -ip
+    -iw
     -luci-app-qos
     -luci-theme-bootstrap
     -qos-scripts
@@ -16,17 +18,17 @@ export BASE_PACKAGES="
     haveged
     htop
     iftop
-    -ip
     ip-full
-    -iw
+    iptables
     iw-full
     iwinfo
     kmod-fs-ext4
+    kmod-ipt-ipset
     kmod-scsi-core
     kmod-usb-storage
+    libiwinfo-lua
     libubus-lua
     libuci-lua
-    libiwinfo-lua
     libustream-openssl
     luci
     luci-theme-material
@@ -37,9 +39,13 @@ export BASE_PACKAGES="
     openssh-sftp-client
     openssh-sftp-server
     openssl-util
+    resolveip
     tmux
     uclient-fetch
     uhttpd
     uhttpd-mod-lua
     usbutils
+    kmod-br-netfilter
+    kmod-ipt-physdev
+    iptables-mod-physdev
     "

@@ -194,6 +194,7 @@ EOT
 	rcmd find "$device_directory/files" -type f -exec chmod 0644 '{}' \; || true
 	rcmd find "$device_directory/files" -type f -name '*.sh' -exec chmod 0755 '{}' \; || true
 	rcmd find "$device_directory/files/etc/uci-defaults" -type f -exec chmod 0755 '{}' \; || true
+	rcmd find "$device_directory/files/etc/hotplug.d" -type f -exec chmod 0755 '{}' \; || true
 	# reset permissions in root's home directory
 	rcmd find "$device_directory/files/root" -type d -exec chmod 0700 '{}' \; || true
 	rcmd find "$device_directory/files/root" -type f -exec chmod 0600 '{}' \; || true
