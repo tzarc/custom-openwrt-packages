@@ -1,0 +1,20 @@
+source base_variant.include
+source router.include
+
+export DEVICE_ARCH=ipq40xx
+export DEVICE_TYPE=generic
+export DEVICE_PROFILE=glinet_gl-b1300
+export DEVICE_PACKAGES="
+    ${DEVICE_PACKAGES}
+    -wpad-mini
+    -wpad-basic
+    wpad-mesh-openssl
+    "
+
+if [[ "$target_version" == "master" ]]; then
+    export IMAGEBUILDER_URL="https://downloads.openwrt.org/snapshots/targets/${DEVICE_ARCH}/${DEVICE_TYPE}/openwrt-imagebuilder-${DEVICE_ARCH}-${DEVICE_TYPE}.Linux-x86_64.tar.xz"
+else
+    export IMAGEBUILDER_URL="https://downloads.openwrt.org/releases/$target_version/targets/${DEVICE_ARCH}/${DEVICE_TYPE}/openwrt-imagebuilder-$target_version-${DEVICE_ARCH}-${DEVICE_TYPE}.Linux-x86_64.tar.xz"
+fi
+
+export ITB_PREFIX=glinet_gl-b1300
