@@ -6,6 +6,8 @@ export DEVICE_PROFILE=
 export DEVICE_PACKAGES="
     ${DEVICE_PACKAGES}
     kmod-e1000
+    https-dns-proxy
+    unbound-daemon-heavy
     "
 
 export DEVICE_TYPE=32

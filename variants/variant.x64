@@ -11,4 +11,6 @@ export DEVICE_PACKAGES="
     kmod-r8169
     kmod-usb-hid
     wpad-mesh-openssl
+    https-dns-proxy
+    unbound-daemon-heavy
     "
