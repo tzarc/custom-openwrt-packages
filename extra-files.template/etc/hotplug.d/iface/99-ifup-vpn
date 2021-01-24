@@ -1,0 +1,5 @@
+#!/bin/sh
+[ "$ACTION" = "ifup" -a "$(echo $INTERFACE | grep -i vpn)" != "" ] && {
+    sysctl -ew net.ipv4.conf.${INTERFACE}.rp_filter=2
+}
+exit 0
